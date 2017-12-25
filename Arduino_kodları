@@ -1,0 +1,51 @@
+#include<LiquidCrystal.h>
+#include <dht.h>
+
+#define dht_dpin A0
+const int gasPin = A1;
+
+LiquidCrystal lcd(12,11,5,4,3,2);
+dht DHT;
+float h = 0;
+float t = 0 ;
+ 
+void setup(){
+  Serial.begin(9600);
+  lcd.begin(16,2);
+
+  delay(300);
+ 
+  delay(700);
+}
+ 
+
+
+void loop(){
+  t = DHT.temperature;
+ delay(800);
+  DHT.read11(dht_dpin);
+
+
+  lcd.home();
+  lcd.print("Gaz Miktari=");
+  lcd.print(analogRead(gasPin));
+  lcd.setCursor(0,1);
+  lcd.println("Sicaklik=");
+  lcd.print(t);
+
+  
+    Serial.print("Gaz Miktari= ");
+    Serial.println(analogRead(gasPin));
+    Serial.print("Sicaklik= ");
+    Serial.print(t); 
+    Serial.println("C  ");
+
+    //Serial.print("\n");
+
+   
+}
+
+
+
+
+
